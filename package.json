@@ -1,5 +1,5 @@
 {
-  "name": "gulp-dev",
+  "name": "gulp-js-dev",
   "version": "0.3.0",
   "description": "Toggle html comments so that you can enable functionality for dev vs. production.",
   "repository": {
