@@ -1,58 +1,45 @@
 # [gulp](https://github.com/wearefractal/gulp)-dev
 
-> Toggle html comments so that you can enable functionality for dev vs.
+> Toggle js comments so that you can enable functionality for dev vs.
 > production.
 
-Have you ever wanted to test your web page and you smartly (for the most
-part!) used appcache and forgot to update your manifest.appcache file?!
-Have you ever wanted to include javascript files for development that
-would not be there in production?  Well, gulp-dev will help you there.
-
 **Turn this:**
-```html
-<!-- !dev -->
-<html manifest="manifest.appcache">
-<!-- /!dev -->
-<!-- dev -->
-<!-- <html> -->
-<!-- /dev -->
-  <head><title>My Page</title></head>
-  <body>
-    <h1>Hello World!</h1>
-  </body>
-</html>
+```js
+var server = '';
+/* !dev */
+server = 'http://server.prod';
+/* /!dev */
+/* dev */
+server = 'http://server.dev';
+/* /dev */
 ```
 
 **Into this for development**
 
-```html
-<!-- !dev -->
-<!-- <html manifest="manifest.appcache"> -->
-<!-- /!dev -->
-<!-- dev -->
-<html>
-<!-- /dev -->
-  <head><title>My Page</title></head>
-  <body>
-    <h1>Hello World!</h1>
-  </body>
-</html>
+```js
+var server = '';
+/* !dev */
+/*
+server = 'http://server.prod';
+*/
+/* /!dev */
+/* dev */
+server = 'http://server.dev';
+/* /dev */
 ```
 
 **Or into this for production**
 
-```html
-<!-- !dev -->
-<html manifest="manifest.appcache">
-<!-- /!dev -->
-<!-- dev -->
-<!-- <html> -->
-<!-- /dev -->
-  <head><title>My Page</title></head>
-  <body>
-    <h1>Hello World!</h1>
-  </body>
-</html>
+```js
+var server = '';
+/* !dev */
+server = 'http://server.prod';
+/* /!dev */
+/* dev */
+/*
+server = 'http://server.dev';
+*/
+/* /dev */
 ```
 
 ## Example Usage with Gulp
@@ -60,12 +47,12 @@ would not be there in production?  Well, gulp-dev will help you there.
 **Development Task**
 ```js
 var gulp = require('gulp');
-var dev = require('gulp-dev');
+var dev = require('gulp-js-dev');
 
 gulp.task('dev', function() {
-  gulp.src('home.html')
+  gulp.src('main.js')
       .pipe(dev(true))
-      .pipe(gulp.dest('index.html'));
+      .pipe(gulp.dest('main.js'));
 });
 ```
 **Default Task (for prod)**
@@ -74,9 +61,9 @@ var gulp = require('gulp');
 var dev = require('gulp-dev');
 
 gulp.task('prod', function() {
-  gulp.src('home.html')
+  gulp.src('main.js')
       .pipe(dev(false))
-      .pipe(gulp.dest('public/index.html'));
+      .pipe(gulp.dest('public/main.js'));
 });
 ```
 
