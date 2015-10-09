@@ -30,14 +30,14 @@ function processFileContents(fileContents, inDevelopmentMode) {
 
   data = processFileContentsForBlock(
     data,
-    '<!-- dev -->',
-    '<!-- /dev -->',
+    '/* dev */',
+    '/* /dev */',
     /* commentOutContentsInBlock */ !inDevelopmentMode);
 
   data = processFileContentsForBlock(
     data,
-    '<!-- !dev -->',
-    '<!-- /!dev -->',
+    '/* !dev */',
+    '/* /!dev */',
     /* commentOutContentsInBlock */ inDevelopmentMode);
 
   return new Buffer(data);
@@ -50,7 +50,7 @@ function processFileContentsForBlock(
   commentOutContentsInBlock) {
   var i;
 
-  var stripHtmlCommentRegex = /<!--(.*)-->/;
+  var stripHtmlCommentRegex = /\/\*(.*)\/\*/;
 
   var inBlock = false;
   var lines = fileContents.split('\n');
@@ -70,7 +70,7 @@ function processFileContentsForBlock(
         }
       } else {
         if(!match) { //if isn't already commented out
-          lines[i] = '<!-- {0} -->'.replace('{0}', line);
+          lines[i] = '/* {0} */'.replace('{0}', line);
         }
       }
     }
