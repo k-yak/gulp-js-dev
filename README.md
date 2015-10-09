@@ -1,4 +1,4 @@
-# [gulp](https://github.com/wearefractal/gulp)-dev
+# [gulp](https://github.com/wearefractal/gulp)-js-dev
 
 > Toggle js comments so that you can enable functionality for dev vs.
 > production.
